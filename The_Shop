@@ -1,0 +1,78 @@
+import random
+from collections import deque
+
+
+inventory = deque()
+choosing = deque()
+gold = 0
+cost = 0
+
+
+
+def inventario():
+    show_inventory = inventory[::-1]
+    print(show_inventory, end="")
+
+def existe():
+    print(choosing)
+   
+
+class item:
+    gold += 1
+
+    def __init__():
+        print("I exist")
+class resource:
+        cost = 1
+class screen(resource):
+        cost += 2
+class battery(resource):
+        cost += 1
+class hardware(resource):
+        cost += 3
+class AAAA(battery):
+        cost += 1
+        def __init__():
+            if gold > 2:
+                choosing.appendleft("AAAA")
+class AAA(battery):
+        cost += 2
+        def __init__():
+            if gold > 3:
+                choosing.appendleft("AAA")
+class AA(battery):
+        cost += 3
+
+        if gold > 4:
+            choosing.appendleft("AA")
+class A(battery):
+        cost += 4
+
+        if gold > 5:
+            choosing.appendleft("A")
+class small(screen):
+        cost += 1
+class medium(screen):
+        cost += 2
+class sbig(screen):
+        cost += 3
+class byte(hardware):
+        cost += 1
+class kilobyte(hardware):
+        cost += 2
+class megabyte(hardware):
+        cost += 3
+class gigabyte(hardware):
+        cost += 4
+class terabyte(hardware):
+        cost += 5
+
+while gold != 100:
+    
+    print("podes comprar")
+    print(choosing)
+    result = input("Bom dia, que vai comprar?")
+    print(gold)
+    gold += 1
+
+
