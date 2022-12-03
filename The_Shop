@@ -2,42 +2,31 @@ import random
 from collections import deque
 
 
-inventory = []
-choosing = deque()
+#Variáveis
+inventory = deque()
 gold = 0
 cost = 0
+day = 1
+done = 0
+choicem = 0
+loop = 0
+
+wood = 0
+iron = 0
+fiber = 0
+ruby = 0
+sap = 0
+dia = 0
+leather = 0
+stone = 0
 
 
+#Funções
+def materials(gold, choice):
+        print()
+        
 
-
-def existe():
-    print(choosing)
-   
-
-class Item:
-    name = ""
-    gold = 1
-    def __init__(self, name, gold):
-        self.name = name
-        self.gold = gold
-
-class Weapon(Item):
-        name = "Sword "
-        damage = 12
-        def __init__(self, subtype, gold, damage):
-                super().__init__(self.name + subtype, gold)
-                self.damage = damage
-
-        def calculateDamage(self, enemy):
-                enemy.hp -= self.damage
-
-class Armor(Item):
-        name = "Armor "
-        def __init__(self, subtype, gold):
-                super().__init__(self.name + subtype, gold)
-
-
-
+#Classes
 class resource:
         cost =1 
         name = ""
@@ -87,19 +76,55 @@ class gigabyte(hardware):
 class terabyte(hardware):
         cost += 5
 
-while gold != 100:
-    
-    nome = input("Diz-me o nome")
-    ouro = input("diz-me o ouro")
-    choosing.appendleft(Weapon(nome, int(ouro), 4))
-    choosing.appendleft(Armor(nome, int(ouro)))
-    for i in choosing:
-        if isinstance(i, Weapon):
-                print(i.name, i.gold, i.damage)
-        elif isinstance(i, Armor):
-                print(i.name, i.gold)
-    result = input("Bom dia, que vai comprar?")
-    print(gold, cost)
-    gold += 1
+#Game
+
+while gold != 100000:
+        print(f"Good morning, this is your {day}º day.\nLet's start the day with some shopping.")
+        while loop == 0:
+                if choicem != "done":
+                        materials(gold,choicem)
+                else:
+                        loop = 1
+        loop = 0
 
 
+
+#Ajuda de fora
+"""
+nome = input("Diz-me o nome")
+ouro = input("diz-me o ouro")
+choosing.appendleft(Weapon(nome, int(ouro), 4))
+choosing.appendleft(Armor(nome, int(ouro)))
+while gold != 100000:
+        for i in reversed(choosing):
+                if isinstance(i, Weapon):
+                        print(i.name, i.gold, i.damage)
+                elif isinstance(i, Armor):
+                        print(i.name, i.gold)
+                break
+        x = choosing.pop()
+        result = input("Bom dia, que vai comprar?")
+        print(gold, cost)
+        gold += 1
+class Item:
+    name = ""
+    gold = 1
+    def __init__(self, name, gold):
+        self.name = name
+        self.gold = gold
+
+class Weapon(Item):
+        name = "Sword "
+        damage = 12
+        def __init__(self, subtype, gold, damage):
+                super().__init__(self.name + subtype, gold)
+                self.damage = damage
+
+        def calculateDamage(self, enemy):
+                enemy.hp -= self.damage
+
+class Armor(Item):
+        name = "Armor "
+        def __init__(self, subtype, gold):
+                super().__init__(self.name + subtype, gold)
+"""
