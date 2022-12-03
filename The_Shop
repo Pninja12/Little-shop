@@ -33,18 +33,8 @@ class Weapon(Item):
 
 class Armor(Item):
         name = "Armor "
-        damage = 12
         def __init__(self, subtype, gold):
                 super().__init__(self.name + subtype, gold)
-
-
-
-
-nome = input("Diz-me o nome")
-ouro = input("diz-me o ouro")
-
-
-
 
 
 
@@ -102,8 +92,12 @@ while gold != 100:
     nome = input("Diz-me o nome")
     ouro = input("diz-me o ouro")
     choosing.appendleft(Weapon(nome, int(ouro), 4))
+    choosing.appendleft(Armor(nome, int(ouro)))
     for i in choosing:
-        print(i.name, i.gold, i.damage)
+        if isinstance(i, Weapon):
+                print(i.name, i.gold, i.damage)
+        elif isinstance(i, Armor):
+                print(i.name, i.gold)
     result = input("Bom dia, que vai comprar?")
     print(gold, cost)
     gold += 1
