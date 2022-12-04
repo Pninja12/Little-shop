@@ -1,4 +1,5 @@
 import random
+import os
 from collections import deque
 
 
@@ -10,20 +11,48 @@ day = 1
 done = 0
 choicem = 0
 loop = 0
+dia = 0
+answer = ""
+no = 0
 
 wood = 0
 iron = 0
 fiber = 0
 ruby = 0
 sap = 0
-dia = 0
 leather = 0
 stone = 0
 
 
 #Funções
-def materials(gold, choice):
-        print()
+def apagar_ecra(): #Código original do meu colega Ricardo 
+ 
+    #O OS do windows é 'nt'
+    if os.name == 'nt':
+        #O 'cls' é o código para apagar o terminal no Windows
+        os.system('cls')
+    else:
+        #O 'clear' é o código para apagar o terminal no Mac e no linux
+        os.system('clear')
+
+def list_resource():
+        print("Wood for 1 gold\nStone for 2 gold\nIron for 4 gold\nFiber for 3 gold\nLeather for 5 gold\nSapphire for 50 gold\nRuby for 65 gold\nDiamond for 80 gold")
+
+def choice(x,y,z):
+        if x == "wood":
+                z = z - 1
+                print("You bought Wood!")
+        elif x == "stone":
+                z = z - 2
+                print("You bought Stone!")
+        elif x == "iron":
+                z = z - 4
+                print("You bought Iron!")
+        elif x == "iron":
+                z = z - 4
+                print("You bought Iron!")
+
+
         
 
 #Classes
@@ -33,7 +62,9 @@ class resource:
         def __init__(self, name, cost):
                 self.name = name
                 self.cost = cost
-                
+
+
+#Classes               
 class screen(resource):
         cost += 2
 class battery(resource):
@@ -57,40 +88,34 @@ class battery(resource):
 
                 if gold > 5:
                         choosing.appendleft("A")
-class hardware(resource):
-        cost += 3
-class small(screen):
-        cost += 1
-class medium(screen):
-        cost += 2
-class sbig(screen):
-        cost += 3
-class byte(hardware):
-        cost += 1
-class kilobyte(hardware):
-        cost += 2
-class megabyte(hardware):
-        cost += 3
-class gigabyte(hardware):
-        cost += 4
-class terabyte(hardware):
-        cost += 5
+
 
 #Game
-
-while gold != 100000:
+while gold != 1000 and gold != 0:
         print(f"Good morning, this is your {day}º day.\nLet's start the day with some shopping.")
         while loop == 0:
                 if choicem != "done":
-                        materials(gold,choicem)
+                        print("You can buy:")
+                        list_resource()
+                        while (True):
+                                print("Which one do you want to buy?")
+                                print("(When ready type 'done')")
+                                answer = input("-->")
+                                choice(answer.islower(),no,gold)
+
+
+
+
                 else:
                         loop = 1
         loop = 0
+        apagar_ecra()
 
 
 
 #Ajuda de fora
-"""
+
+""" 
 nome = input("Diz-me o nome")
 ouro = input("diz-me o ouro")
 choosing.appendleft(Weapon(nome, int(ouro), 4))
@@ -127,4 +152,4 @@ class Armor(Item):
         name = "Armor "
         def __init__(self, subtype, gold):
                 super().__init__(self.name + subtype, gold)
-"""
+ """
