@@ -4,17 +4,16 @@ from collections import deque
 
 
 #Variáveis
-inventory_material = deque()
+inventory_material = []
 inventory_sell = deque()
 gold = 10
 cost = 0
 day = 1
 done = 0
-choicem = 0
+desfunction = []
 loop = 0
 dia = 0
 answer = ""
-no = 0
 material = ""
 
 wood = 0
@@ -40,45 +39,44 @@ def apagar_ecra(): #Código original do meu colega Ricardo
 def list_resource():
         print("Wood for 1 gold\nStone for 2 gold\nIron for 4 gold\nFiber for 3 gold\nLeather for 5 gold\nSapphire for 50 gold\nRuby for 65 gold\nDiamond for 80 gold")
 
-def choice(x,y,z,a):
-        print(x)
-        if x.islower() == "wood":
+def choice(x,z,a):
+        if x.lower() == "wood":
                 z = z - 1
                 print("You bought Wood!")
                 a="wood"
-        elif x.islower() == "stone":
+        elif x.lower() == "stone":
                 z = z - 2
                 print("You bought Stone!")
                 a="stone"
-        elif x.islower() == "iron":
+        elif x.lower() == "iron":
                 z = z - 4
                 print("You bought Iron!")
                 a="iron"
-        elif x.islower() == "fiber":
+        elif x.lower() == "fiber":
                 z = z - 3
                 print("You bought Fiber!")
                 a="fiber"
-        elif x.islower() == "leather":
+        elif x.lower() == "leather":
                 z = z - 5
                 print("You bought Leather!")
                 a="leather"
-        elif x.islower() == "sapphire":
+        elif x.lower() == "sapphire":
                 z = z - 50
                 print("You bought Sapphire!!!")
                 a="sapphire"
-        elif x.islower() == "ruby":
+        elif x.lower() == "ruby":
                 z = z - 65
                 print("You bought Ruby!!!")
                 a="ruby"
-        elif x.islower() == "diamond":
+        elif x.lower() == "diamond":
                 z = z - 80
                 print("You bought Diamond!!!")
                 a="diamond"
         else:
-                if x.islower() != "done":
-                        y=1
+                if x.lower() != "done":
                         print("Write again")
         
+        return z,a
                 
 
         
@@ -122,24 +120,23 @@ class battery(resource):
 while gold != 1000 and gold != 0:
         print(f"Good morning, this is your {day}º day.\nLet's start the day with some shopping.")
         while loop == 0:
-                if choicem != "done":
-                        print("You can buy:")
-                        list_resource()
-                        while (True):
-                                no=0
-                                print("Which one do you want to buy?")
-                                print("(When ready type 'done')")
-                                answer = input("-->")
-                                choice(str(answer),no,gold,material)
-                                inventory_material.append(material) 
-                                if answer.islower() == "done" and no==0:
-                                        print("Let's head to the next one.")
+                print("You can buy:")
+                list_resource()
+                while (True):
+                        no=0
+                        print("Which one do you want to buy?")
+                        print("(When ready type 'done')")
+                        answer = input("-->")
+                        desfunction = choice(answer,gold,material)
+                        gold = desfunction[0]
+                        material = desfunction[1]
+                        if material != "": 
+                                inventory_material.append(material)
 
+                        if answer.lower() == "done":
+                                print("Let's head to the next one.")
+                                break
 
-
-
-                else:
-                        loop = 1
         loop = 0
         apagar_ecra()
 
