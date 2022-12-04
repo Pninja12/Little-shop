@@ -4,8 +4,9 @@ from collections import deque
 
 
 #Variáveis
-inventory = deque()
-gold = 0
+inventory_material = deque()
+inventory_sell = deque()
+gold = 10
 cost = 0
 day = 1
 done = 0
@@ -14,6 +15,7 @@ loop = 0
 dia = 0
 answer = ""
 no = 0
+material = ""
 
 wood = 0
 iron = 0
@@ -38,20 +40,46 @@ def apagar_ecra(): #Código original do meu colega Ricardo
 def list_resource():
         print("Wood for 1 gold\nStone for 2 gold\nIron for 4 gold\nFiber for 3 gold\nLeather for 5 gold\nSapphire for 50 gold\nRuby for 65 gold\nDiamond for 80 gold")
 
-def choice(x,y,z):
-        if x == "wood":
+def choice(x,y,z,a):
+        print(x)
+        if x.islower() == "wood":
                 z = z - 1
                 print("You bought Wood!")
-        elif x == "stone":
+                a="wood"
+        elif x.islower() == "stone":
                 z = z - 2
                 print("You bought Stone!")
-        elif x == "iron":
+                a="stone"
+        elif x.islower() == "iron":
                 z = z - 4
                 print("You bought Iron!")
-        elif x == "iron":
-                z = z - 4
-                print("You bought Iron!")
-
+                a="iron"
+        elif x.islower() == "fiber":
+                z = z - 3
+                print("You bought Fiber!")
+                a="fiber"
+        elif x.islower() == "leather":
+                z = z - 5
+                print("You bought Leather!")
+                a="leather"
+        elif x.islower() == "sapphire":
+                z = z - 50
+                print("You bought Sapphire!!!")
+                a="sapphire"
+        elif x.islower() == "ruby":
+                z = z - 65
+                print("You bought Ruby!!!")
+                a="ruby"
+        elif x.islower() == "diamond":
+                z = z - 80
+                print("You bought Diamond!!!")
+                a="diamond"
+        else:
+                if x.islower() != "done":
+                        y=1
+                        print("Write again")
+        
+                
 
         
 
@@ -98,10 +126,14 @@ while gold != 1000 and gold != 0:
                         print("You can buy:")
                         list_resource()
                         while (True):
+                                no=0
                                 print("Which one do you want to buy?")
                                 print("(When ready type 'done')")
                                 answer = input("-->")
-                                choice(answer.islower(),no,gold)
+                                choice(str(answer),no,gold,material)
+                                inventory_material.append(material) 
+                                if answer.islower() == "done" and no==0:
+                                        print("Let's head to the next one.")
 
 
 
