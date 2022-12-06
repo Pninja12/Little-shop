@@ -15,6 +15,8 @@ desfunction = []
 dia = 0
 answer = ""
 material = ""
+crafting = []
+errado = 0
 
 wood = 0
 iron = 0
@@ -27,53 +29,59 @@ stone = 0
 
 #Funções
 def apagar_ecra(): #Código original do meu colega Ricardo 
- 
-    #O OS do windows é 'nt'
-    if os.name == 'nt':
-        #O 'cls' é o código para apagar o terminal no Windows
-        os.system('cls')
-    else:
-        #O 'clear' é o código para apagar o terminal no Mac e no linux
-        os.system('clear')
+        
+        time.sleep(3)
+        #O OS do windows é 'nt'
+        if os.name == 'nt':
+                #O 'cls' é o código para apagar o terminal no Windows
+                os.system('cls')
+        else:
+                #O 'clear' é o código para apagar o terminal no Mac e no linux
+                os.system('clear')
 
 def list_resource():
-        print("Wood for 1 gold\nStone for 2 gold\nIron for 4 gold\nFiber for 3 gold\nLeather for 5 gold\nSapphire for 50 gold\nRuby for 65 gold\nDiamond for 80 gold")
+        print("--------------------\nWood for 1 gold\n--------------------\nStone for 2 gold\n--------------------\nIron for 4 gold\n--------------------\nFiber for 3 gold\n--------------------\nLeather for 5 gold\n--------------------\nSapphire for 50 gold\n--------------------\nRuby for 65 gold\n--------------------\nDiamond for 80 gold\n--------------------\n")
+
+def Answer():
+        print("\nWhen you feel ready, type 'done'")
+        x = input("\n-->")
+        return x.lower()
 
 def choice(x,z,a):
-        if x.lower() == "wood" and z >= 1:
+        if x == "wood" and z >= 1:
                 z = z - 1
                 print("You bought Wood!")
                 a="wood"
-        elif x.lower() == "stone" and z >= 2:
+        elif x == "stone" and z >= 2:
                 z = z - 2
                 print("You bought Stone!")
                 a="stone"
-        elif x.lower() == "iron" and z >= 4:
+        elif x == "iron" and z >= 4:
                 z = z - 4
                 print("You bought Iron!")
                 a="iron"
-        elif x.lower() == "fiber" and z >= 3:
+        elif x == "fiber" and z >= 3:
                 z = z - 3
                 print("You bought Fiber!")
                 a="fiber"
-        elif x.lower() == "leather" and z >= 5:
+        elif x == "leather" and z >= 5:
                 z = z - 5
                 print("You bought Leather!")
                 a="leather"
-        elif x.lower() == "sapphire" and z >= 50:
+        elif x == "sapphire" and z >= 50:
                 z = z - 50
                 print("You bought Sapphire!!!")
                 a="sapphire"
-        elif x.lower() == "ruby" and z >= 65:
+        elif x == "ruby" and z >= 65:
                 z = z - 65
                 print("You bought Ruby!!!")
                 a="ruby"
-        elif x.lower() == "diamond" and z >= 80:
+        elif x == "diamond" and z >= 80:
                 z = z - 80
                 print("You bought Diamond!!!")
                 a="diamond"
         else:
-                if x.lower() != "done":
+                if x != "done":
                         print("Write again\nYou wrote something wrong or you are out of money")
         
         return z,a
@@ -91,29 +99,10 @@ class resource:
 
 
 #Classes               
-class screen(resource):
-        cost += 2
-class battery(resource):
-        cost += 1
-
-        def __init__():
-                cost += 1
-                if gold > 2:
-                        choosing.appendleft("AAAA")
-
-                cost += 2
-                if gold > 3:
-                        choosing.appendleft("AAA")
-
-                cost += 3
-
-                if gold > 4:
-                        choosing.appendleft("AA")
-
-                cost += 4
-
-                if gold > 5:
-                        choosing.appendleft("A")
+class Craft:
+        pass
+class Sword(Craft):
+        pass
 
 
 #Game
@@ -125,24 +114,53 @@ while gold != 1000 and gold != 0:
                 print("You can buy:")
                 list_resource()
                 print("Which one do you want to buy?\nRemember you have",gold,"of gold")
-                print("(When ready type 'done')")
-                answer = input("-->")
+                answer = Answer()
                 desfunction = choice(answer,gold,material)
                 gold = desfunction[0]
                 if desfunction[1] != "": 
                         inventory_material.append(desfunction[1])
-                if answer.lower() == "done":
+                if answer == "done":
                         print("Let's head to the next one.")
                         break
-                time.sleep(3)
                 apagar_ecra()
+        apagar_ecra()
+        while(True):
+                errado = 0
+                print("Now it's time to craft.\nYou will use the materials you have bought before.")
+                print("Your inventory is:")
+                for i in inventory_material:
+                        print(i)
+                print("Which one do you want to use?")
+                answer = Answer()
+                if inventory_material:
+                        for i in inventory_material:
+                                if answer == i:
+                                        crafting.append(answer)
+                                        inventory_material.remove(answer)
+                                        errado = 0
+                                        break
+                                if answer == "done":
+                                        errado = 0
+                                        break
+                                else:
+                                        errado += 1
+                elif not inventory_material and answer != "done":
+                        print("You don't have any more items")
+                if errado > 0:
+                        print("You don't have that or you wrote it wrong")
+                if answer == "done":
+                        break
+                apagar_ecra()
+
+
+                                        
 
 
 
 #Ajuda de fora
 
-""" 
-nome = input("Diz-me o nome")
+
+""" nome = input("Diz-me o nome")
 ouro = input("diz-me o ouro")
 choosing.appendleft(Weapon(nome, int(ouro), 4))
 choosing.appendleft(Armor(nome, int(ouro)))
@@ -177,5 +195,4 @@ class Weapon(Item):
 class Armor(Item):
         name = "Armor "
         def __init__(self, subtype, gold):
-                super().__init__(self.name + subtype, gold)
- """
+                super().__init__(self.name + subtype, gold) """
