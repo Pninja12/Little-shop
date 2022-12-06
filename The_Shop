@@ -111,6 +111,11 @@ while gold != 1000 and gold != 0:
         apagar_ecra()
         print(f"Good morning, this is your {day}º day.\nLet's start the day with some shopping.")
         while (True):
+                if gold == 0:
+                        print("You have ran out of gold :(\nIt's okay, you will be able to sell items later")
+                        time.sleep(2)
+                        apagar_ecra()
+                        break
                 print("You can buy:")
                 list_resource()
                 print("Which one do you want to buy?\nRemember you have",gold,"of gold")
@@ -123,13 +128,12 @@ while gold != 1000 and gold != 0:
                         print("Let's head to the next one.")
                         break
                 apagar_ecra()
-        apagar_ecra()
         while(True):
                 errado = 0
                 print("Now it's time to craft.\nYou will use the materials you have bought before.")
-                print("Your inventory is:")
+                print("Your inventory is:\n--------")
                 for i in inventory_material:
-                        print(i)
+                        print(i,"\n--------")
                 print("Which one do you want to use?")
                 answer = Answer()
                 if inventory_material:
@@ -150,7 +154,12 @@ while gold != 1000 and gold != 0:
                         print("You don't have that or you wrote it wrong")
                 if answer == "done":
                         break
+                elif gold == 0:
+                        print("You have ran out of gold :(\n It's okay, you just need to sell items later")
+                print("\nLet's craft!")
                 apagar_ecra()
+        while(True):
+                pass
 
 
                                         
