@@ -17,6 +17,8 @@ answer = ""
 material = ""
 crafting = []
 errado = 0
+xp = 0
+name = ""
 
 wood = 0
 iron = 0
@@ -86,25 +88,54 @@ def choice(x,z,a):
         
         return z,a
                 
+def show_craft(x):
+        print("Your crafting recipes are:")
+        print("\nYou can make a Wooden Sword with 2 Wood\n\nYou can make a Slingshot with a Fiber and a Wood\n\nYou can make a Wooden Plate with 3 Wood")
+
+
 
         
 
 #Classes
-class resource:
-        cost =1 
+class Craft:
+        xp = 1 
         name = ""
-        def __init__(self, name, cost):
+        cost = 1
+        def __init__(self,name, cost,xp):
+                name = input("Name it:")
+                cost = input("How much does it cost:")
                 self.name = name
                 self.cost = cost
+                self.xp = xp
 
 
 #Classes               
-class Craft:
-        pass
 class Sword(Craft):
-        pass
 
+        def __init__(self, name, cost, xp):
+                super().__init__(name, cost, xp)
+                self.xp = xp + 5
 
+class Sword(Craft):
+
+        def __init__(self, name, cost, xp):
+                super().__init__(name, cost, xp)
+                self.xp = xp + 5  
+        
+class Bow(Craft):
+
+        def __init__(self, name, cost, xp):
+                super().__init__(name, cost, xp)
+                self.xp = xp + 10
+
+inventory_sell.appendleft(Sword(name, int(cost),xp))
+inventory_sell.appendleft(Bow(name, int(cost),xp))
+for i in reversed(inventory_sell):
+        if isinstance(i, Sword):
+                print(i.name, i.cost, i.xp)
+        elif isinstance(i, Bow):
+                print(i.name, i.cost, i.xp)
+time.sleep(5)
 #Game
 while gold != 1000 and gold != 0:
         day = day + 1
@@ -131,6 +162,7 @@ while gold != 1000 and gold != 0:
         while(True):
                 errado = 0
                 print("Now it's time to craft.\nYou will use the materials you have bought before.")
+                show_craft(xp)
                 print("Your inventory is:\n--------")
                 for i in inventory_material:
                         print(i,"\n--------")
@@ -154,9 +186,6 @@ while gold != 1000 and gold != 0:
                         print("You don't have that or you wrote it wrong")
                 if answer == "done":
                         break
-                elif gold == 0:
-                        print("You have ran out of gold :(\n It's okay, you just need to sell items later")
-                print("\nLet's craft!")
                 apagar_ecra()
         while(True):
                 pass
@@ -173,7 +202,9 @@ while gold != 1000 and gold != 0:
 ouro = input("diz-me o ouro")
 choosing.appendleft(Weapon(nome, int(ouro), 4))
 choosing.appendleft(Armor(nome, int(ouro)))
-while gold != 100000:
+while gold != 100000:"""
+        #For i que verifica qual a melhor maneira de representar uma classe
+"""
         for i in reversed(choosing):
                 if isinstance(i, Weapon):
                         print(i.name, i.gold, i.damage)
