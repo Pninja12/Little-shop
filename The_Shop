@@ -128,14 +128,6 @@ class Bow(Craft):
                 super().__init__(name, cost, xp)
                 self.xp = xp + 10
 
-inventory_sell.appendleft(Sword(name, int(cost),xp))
-inventory_sell.appendleft(Bow(name, int(cost),xp))
-for i in reversed(inventory_sell):
-        if isinstance(i, Sword):
-                print(i.name, i.cost, i.xp)
-        elif isinstance(i, Bow):
-                print(i.name, i.cost, i.xp)
-time.sleep(5)
 #Game
 while gold != 1000 and gold != 0:
         day = day + 1
