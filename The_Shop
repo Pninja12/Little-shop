@@ -19,6 +19,7 @@ crafting = []
 errado = 0
 xp = 0
 name = ""
+number = 0
 
 wood = 0
 iron = 0
@@ -78,6 +79,7 @@ def choice(x,z,a):
                 z = z - 65
                 print("You bought Ruby!!!")
                 a="ruby"
+
         elif x == "diamond" and z >= 80:
                 z = z - 80
                 print("You bought Diamond!!!")
@@ -90,7 +92,58 @@ def choice(x,z,a):
                 
 def show_craft(x):
         print("Your crafting recipes are:")
-        print("\nYou can make a Wooden Sword with 2 Wood\n\nYou can make a Slingshot with a Fiber and a Wood\n\nYou can make a Wooden Plate with 3 Wood")
+        print("\nSwords:")
+        print("You can make a Wooden Sword with 2 Wood")
+        if xp >= 100:
+                print("-\nYou can make a Stone Sword with 1 Wood and 1 Stone")
+        if xp >= 250:
+                print("-\nYou can make a Iron Sword with 2 Iron")
+        if xp >= 400:
+                print("-\nYou can make a Great Sword with 2 Iron and 1 Leather")
+        if xp >= 700:
+                print("-\nYou can make a Lava Great Sword with 2 Iron, 1 Leather and 1 Ruby")
+        if xp >= 800:
+                print("-\nYou can make a Ocean Great Sword with 2 Iron, 1 Leather and 1 Sapphire")
+        if xp >= 1000:
+                print("-\nYou can make a Light Great Sword with 2 Iron, 1 Leather and 1 Diamond")
+        print("\nBows:")
+        print("You can make a Slingshot with 1 Fiber and 1 Wood")
+        if xp >= 150:
+                print("-\nYou can make a Stone Bow with 1 Fiber and 2 Stone")
+        if xp >= 300:
+                print("-\nYou can make a Iron Bow with 2 Iron and 1 Fiber")
+        if xp >= 500:
+                print("-\nYou can make a Hunting Bow with 2 Iron, 1 Leather and 1 Fiber")
+        if xp >= 800:
+                print("-\nYou can make a Fire Hunting Bow with 2 Iron, 1 Leather and 1 Fiber and 1 Ruby")
+        if xp >= 900:
+                print("-\nYou can make a Ice Hunting Bow with 2 Iron, 1 Leather and 1 Fiber and 1 Sapphire")
+        if xp >= 1100:
+                print("-\nYou can make a Heavenly Hunting Bow with 2 Iron, 1 Leather and 1 Fiber and 1 Diamond")
+        print("\nShield:")
+        print("You can make a Wooden Shield with 4 wood")
+        if xp >= 100:
+                print("You can make a Stone Shield with 4 Stone")
+        if xp >= 200:
+                print("You can make a Iron Shield with 4 Iron")
+        if xp >= 300:
+                print("You can make a Red Ultra Shield with 5 Iron and 1 Ruby")
+        if xp >= 400:
+                print("You can make a Blue Ultra Shield with 5 Iron and 1 Sapphire")
+        if xp >= 500:
+                print("You can make a Super Ultra Shield with 5 Iron and 1 Diamond")
+        print("\nArmor:")
+        print("You can make a Wooden Plate with 3 Wood")
+        if xp >= 300:
+                print("-\nYou can make a Stone extension with 2 Stone and 1 Wooden Plate")
+        if xp >= 500:
+                print("-\nYou can make a  Mega Armor with 4 Iron and 1 Stone extension")
+        if xp >= 1000:
+                print("-\nYou can make a Blazing Mega Armor with Mega Armor, 1 Iron and 1 Ruby")
+        if xp >= 1200:
+                print("-\nYou can make a Chilling Mega Armor with Mega Armor, 1 Iron and 1 Sapphire")
+        if xp >= 5000:
+                print("-\nYou can make a Divine Mega Armor with Mega Armor, 1 Iron and 1 Diamond")
 
 
 
@@ -111,22 +164,119 @@ class Craft:
 
 #Classes               
 class Sword(Craft):
+        if number == 1:
+                def __init__(self, name, cost, xp):
+                        super().__init__(name + "Sword", cost, xp)
+                        self.xp = xp + 17
+        elif number == 2:
+                def __init__(self, name, cost, xp):
+                        super().__init__(name + "Sword", cost, xp)
+                        self.xp = xp + 27
+        elif number == 3:
+                def __init__(self, name, cost, xp):
+                        super().__init__(name + "Sword", cost, xp)
+                        self.xp = xp + 37
+        elif number == 4:
+                def __init__(self, name, cost, xp):
+                        super().__init__(name + "Sword", cost, xp)
+                        self.xp = xp + 47
+        elif number == 5:
+                def __init__(self, name, cost, xp):
+                        super().__init__(name + "Sword", cost, xp)
+                        self.xp = xp + 77
+        elif number == 6:
+                def __init__(self, name, cost, xp):
+                        super().__init__(name + "Sword", cost, xp)
+                        self.xp = xp + 87
+        elif number == 7:
+                def __init__(self, name, cost, xp):
+                        super().__init__(name + "Sword", cost, xp)
+                        self.xp = xp + 97
 
-        def __init__(self, name, cost, xp):
-                super().__init__(name, cost, xp)
-                self.xp = xp + 5
+class Shield(Craft):
 
-class Sword(Craft):
-
-        def __init__(self, name, cost, xp):
-                super().__init__(name, cost, xp)
-                self.xp = xp + 5  
+        if number == 1:
+                def __init__(self, name, cost, xp):
+                        super().__init__(name + "Shield", cost, xp)
+                        self.xp = xp + 25
+        elif number == 2:
+                def __init__(self, name, cost, xp):
+                        super().__init__(name + "Shield", cost, xp)
+                        self.xp = xp + 35
+        elif number == 3:
+                def __init__(self, name, cost, xp):
+                        super().__init__(name + "Shield", cost, xp)
+                        self.xp = xp + 45
+        elif number == 4:
+                def __init__(self, name, cost, xp):
+                        super().__init__(name + "Shield", cost, xp)
+                        self.xp = xp + 85
+        elif number == 5:
+                def __init__(self, name, cost, xp):
+                        super().__init__(name + "Shield", cost, xp)
+                        self.xp = xp + 95
+        elif number == 6:
+                def __init__(self, name, cost, xp):
+                        super().__init__(name + "Shield", cost, xp)
+                        self.xp = xp + 105
         
 class Bow(Craft):
 
-        def __init__(self, name, cost, xp):
-                super().__init__(name, cost, xp)
-                self.xp = xp + 10
+        if number == 1:
+                def __init__(self, name, cost, xp):
+                        super().__init__(name + "Bow", cost, xp)
+                        self.xp = xp + 13
+        elif number == 2:
+                def __init__(self, name, cost, xp):
+                        super().__init__(name + "Bow", cost, xp)
+                        self.xp = xp + 23
+        elif number == 3:
+                def __init__(self, name, cost, xp):
+                        super().__init__(name + "Bow", cost, xp)
+                        self.xp = xp + 43
+        elif number == 4:
+                def __init__(self, name, cost, xp):
+                        super().__init__(name + "Bow", cost, xp)
+                        self.xp = xp + 63
+        elif number == 5:
+                def __init__(self, name, cost, xp):
+                        super().__init__(name + "Bow", cost, xp)
+                        self.xp = xp + 103
+        elif number == 6:
+                def __init__(self, name, cost, xp):
+                        super().__init__(name + "Bow", cost, xp)
+                        self.xp = xp + 113
+        elif number == 7:
+                def __init__(self, name, cost, xp):
+                        super().__init__(name + "Bow", cost, xp)
+                        self.xp = xp + 123
+class Armour(Craft):
+
+        if number == 1:
+                def __init__(self, name, cost, xp):
+                        super().__init__(name + "Armour", cost, xp)
+                        self.xp = xp + 29
+        elif number == 2:
+                def __init__(self, name, cost, xp):
+                        super().__init__(name + "Armour", cost, xp)
+                        self.xp = xp + 49
+        elif number == 3:
+                def __init__(self, name, cost, xp):
+                        super().__init__(name + "Armour", cost, xp)
+                        self.xp = xp + 69
+        elif number == 4:
+                def __init__(self, name, cost, xp):
+                        super().__init__(name + "Armour", cost, xp)
+                        self.xp = xp + 139
+        elif number == 5:
+                def __init__(self, name, cost, xp):
+                        super().__init__(name + "Armour", cost, xp)
+                        self.xp = xp + 149
+        elif number == 6:
+                def __init__(self, name, cost, xp):
+                        super().__init__(name + "Armour", cost, xp)
+                        self.xp = xp + 159
+
 
 #Game
 while gold != 1000 and gold != 0:
@@ -180,7 +330,7 @@ while gold != 1000 and gold != 0:
                         break
                 apagar_ecra()
         while(True):
-                pass
+                print("Alright, now it's time ")
 
 
                                         
