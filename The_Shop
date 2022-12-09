@@ -5,7 +5,7 @@ import time
 
 
 #Variáveis
-inventory_material = []
+inventory_material = ["wood","wood","wood","wood","wood","wood","wood","wood","wood"]
 inventory_sell = deque()
 gold = 10
 cost = 0
@@ -17,12 +17,13 @@ answer = ""
 material = ""
 crafting = []
 errado = 0
-player_xp = 50
+player_xp = 1111111150
 name = ""
 number = 0
 correto = 0
 teste = 0
 verificado = []
+objetivo = 0
 
 wood = 0
 iron = 0
@@ -279,9 +280,21 @@ class Armour(Craft):
                         super().__init__(name + "Armour", cost, xp)
                         self.player_xp += 159
 
-
+print("Com qual dificuldade quer o jogo?\nNota: Só afeta o objetivo")
+print("Normal - 1\nComplicado - 2\nDifícil - 3")
+while(True):
+        answer = int(input("\n-->"))
+        if answer == 1:
+                objetivo = 1000
+                break
+        if answer == 2:
+                objetivo = 10000
+                break
+        if answer == 3:
+                objetivo = 100000
+                break
 #Game
-while gold != 1000 and gold != 0:
+while gold <= objetivo and gold >= 0:
         day = day + 1
         apagar_ecra()
         print(f"Good morning, this is your {day}º day.\nLet's start the day with some shopping.")
@@ -337,19 +350,19 @@ while gold != 1000 and gold != 0:
                                         correto = 0
                                         for i in inventory_material:
                                                 if i == "wood":
-                                                        correto = 1
+                                                        correto += 1
                                                         verificado.append("wood")
                                                         inventory_material.remove("wood")
                                                         break
                                         for i in inventory_material:
                                                 if i == "wood":
-                                                        correto = 2
+                                                        correto += 1
                                                         verificado.append("wood")
                                                         inventory_material.remove("wood")
                                                         break
                                         if correto == 2:
                                                 if (random.randint(1, 10) * (player_xp/100)) >= 3:
-                                                        print("Sucesso, a arma foi feita!")
+                                                        print("Sucess, the sword was made!")
                                                         number = 1
                                                         crafting.append(Sword(name,int(cost),player_xp))
                                                         player_xp += 17
@@ -362,23 +375,23 @@ while gold != 1000 and gold != 0:
                                                 for i in verificado:
                                                         inventory_material.append(i)
                                                 verificado.clear()
-                                if answer == "2" and player_xp >= 100:
+                                elif answer == "2" and player_xp >= 100:
                                         correto = 0
                                         for i in inventory_material:
                                                 if i == "stone":
-                                                        correto = 1
+                                                        correto += 1
                                                         verificado.append("stone")
                                                         inventory_material.remove("stone")
                                                         break
                                         for i in inventory_material:
                                                 if i == "wood":
-                                                        correto = 2
+                                                        correto += 1
                                                         verificado.append("wood")
                                                         inventory_material.remove("wood")
                                                         break
                                         if correto == 2:
                                                 if (random.randint(1, 10) * (player_xp/100)) >= 5:
-                                                        print("Sucesso, a arma foi feita!")
+                                                        print("Sucess, the sword was made!")
                                                         number = 2
                                                         crafting.append(Sword(name,int(cost),player_xp))
                                                         player_xp += 27
@@ -391,23 +404,23 @@ while gold != 1000 and gold != 0:
                                                 for i in verificado:
                                                         inventory_material.append(i)
                                                 verificado.clear()
-                                if answer == "3" and player_xp >= 250:
+                                elif answer == "3" and player_xp >= 250:
                                         correto = 0
                                         for i in inventory_material:
                                                 if i == "iron":
-                                                        correto = 1
+                                                        correto += 1
                                                         verificado.append("iron")
                                                         inventory_material.remove("iron")
                                                         break
                                         for i in inventory_material:
                                                 if i == "iron":
-                                                        correto = 2
+                                                        correto += 1
                                                         verificado.append("iron")
                                                         inventory_material.remove("iron")
                                                         break
                                         if correto == 2:
                                                 if (random.randint(1, 10) * (player_xp/100)) >= 10:
-                                                        print("Sucesso, a arma foi feita!")
+                                                        print("Sucess, the sword was made!")
                                                         number = 3
                                                         crafting.append(Sword(name,int(cost),player_xp))
                                                         player_xp += 37
@@ -415,29 +428,34 @@ while gold != 1000 and gold != 0:
                                                         print("It went wrong")
                                                 for i in crafting:
                                                         inventory_sell.appendleft((i.name, i.cost))
-                                if answer == "4" and player_xp >= 400:
+                                        else:
+                                                print("You don't have enough materials")
+                                                for i in verificado:
+                                                        inventory_material.append(i)
+                                                verificado.clear()
+                                elif answer == "4" and player_xp >= 400:
                                         correto = 0
                                         for i in inventory_material:
                                                 if i == "iron":
-                                                        correto = 1
+                                                        correto += 1
                                                         verificado.append("iron")
                                                         inventory_material.remove("iron")
                                                         break
                                         for i in inventory_material:
                                                 if i == "iron":
-                                                        correto = 2
+                                                        correto += 1
                                                         verificado.append("iron")
                                                         inventory_material.remove("iron")
                                                         break
                                         for i in inventory_material:
                                                 if i == "leather":
-                                                        correto = 2
+                                                        correto += 1
                                                         verificado.append("leather")
                                                         inventory_material.remove("leather")
                                                         break
-                                        if correto == 2:
+                                        if correto == 3:
                                                 if (random.randint(1, 10) * (player_xp/100)) >= 14:
-                                                        print("Sucesso, a arma foi feita!")
+                                                        print("Sucess, the sword was made!")
                                                         number = 4
                                                         crafting.append(Sword(name,int(cost),player_xp))
                                                         player_xp += 47
@@ -450,35 +468,35 @@ while gold != 1000 and gold != 0:
                                                 for i in verificado:
                                                         inventory_material.append(i)
                                                 verificado.clear()
-                                if answer == "5" and player_xp >= 700:
+                                elif answer == "5" and player_xp >= 700:
                                         correto = 0
                                         for i in inventory_material:
                                                 if i == "iron":
-                                                        correto = 1
+                                                        correto += 1
                                                         verificado.append("iron")
                                                         inventory_material.remove("iron")
                                                         break
                                         for i in inventory_material:
                                                 if i == "iron":
-                                                        correto = 2
+                                                        correto += 1
                                                         verificado.append("iron")
                                                         inventory_material.remove("iron")
                                                         break
                                         for i in inventory_material:
                                                 if i == "leather":
-                                                        correto = 2
+                                                        correto += 1
                                                         verificado.append("leather")
                                                         inventory_material.remove("leather")
                                                         break
                                         for i in inventory_material:
                                                 if i == "ruby":
-                                                        correto = 2
+                                                        correto += 1
                                                         verificado.append("ruby")
                                                         inventory_material.remove("ruby")
                                                         break
-                                        if correto == 2:
+                                        if correto == 4:
                                                 if (random.randint(1, 10) * (player_xp/100)) >= 19:
-                                                        print("Sucesso, a arma foi feita!")
+                                                        print("Sucess, the sword was made!")
                                                         number = 5
                                                         crafting.append(Sword(name,int(cost),player_xp))
                                                         player_xp += 77
@@ -486,35 +504,40 @@ while gold != 1000 and gold != 0:
                                                         print("It went wrong")
                                                 for i in crafting:
                                                         inventory_sell.appendleft((i.name, i.cost))
-                                if answer == "6" and player_xp >= 800:
+                                        else:
+                                                print("You don't have enough materials")
+                                                for i in verificado:
+                                                        inventory_material.append(i)
+                                                verificado.clear()
+                                elif answer == "6" and player_xp >= 800:
                                         correto = 0
                                         for i in inventory_material:
                                                 if i == "iron":
-                                                        correto = 1
+                                                        correto += 1
                                                         verificado.append("iron")
                                                         inventory_material.remove("iron")
                                                         break
                                         for i in inventory_material:
                                                 if i == "iron":
-                                                        correto = 2
+                                                        correto += 1
                                                         verificado.append("iron")
                                                         inventory_material.remove("iron")
                                                         break
                                         for i in inventory_material:
                                                 if i == "leather":
-                                                        correto = 2
+                                                        correto += 1
                                                         verificado.append("leather")
                                                         inventory_material.remove("leather")
                                                         break
                                         for i in inventory_material:
                                                 if i == "sapphire":
-                                                        correto = 2
+                                                        correto += 1
                                                         verificado.append("sapphire")
                                                         inventory_material.remove("sapphire")
                                                         break
-                                        if correto == 2:
+                                        if correto == 4:
                                                 if (random.randint(1, 10) * (player_xp/100)) >= 22:
-                                                        print("Sucesso, a arma foi feita!")
+                                                        print("Sucess, the sword was made!")
                                                         number = 6
                                                         crafting.append(Sword(name,int(cost),player_xp))
                                                         player_xp += 87
@@ -522,35 +545,35 @@ while gold != 1000 and gold != 0:
                                                         print("It went wrong")
                                                 for i in crafting:
                                                         inventory_sell.appendleft((i.name, i.cost))
-                                if answer == "7" and player_xp >= 700:
+                                elif answer == "7" and player_xp >= 700:
                                         correto = 0
                                         for i in inventory_material:
                                                 if i == "iron":
-                                                        correto = 1
+                                                        correto += 1
                                                         verificado.append("iron")
                                                         inventory_material.remove("iron")
                                                         break
                                         for i in inventory_material:
                                                 if i == "iron":
-                                                        correto = 2
+                                                        correto += 1
                                                         verificado.append("iron")
                                                         inventory_material.remove("iron")
                                                         break
                                         for i in inventory_material:
                                                 if i == "leather":
-                                                        correto = 2
+                                                        correto += 1
                                                         verificado.append("leather")
                                                         inventory_material.remove("leather")
                                                         break
                                         for i in inventory_material:
                                                 if i == "diamond":
-                                                        correto = 2
+                                                        correto += 1
                                                         verificado.append("diamond")
                                                         inventory_material.remove("diamond")
                                                         break
-                                        if correto == 2:
+                                        if correto == 4:
                                                 if (random.randint(1, 10) * (player_xp/100)) >= 25:
-                                                        print("Sucesso, a arma foi feita!")
+                                                        print("Sucess, the sword was made!")
                                                         number = 7
                                                         crafting.append(Sword(name,int(cost),player_xp))
                                                         player_xp += 97
@@ -583,19 +606,19 @@ while gold != 1000 and gold != 0:
                                         correto = 0
                                         for i in inventory_material:
                                                 if i == "fiber":
-                                                        correto = 1
+                                                        correto += 1
                                                         verificado.append("fiber")
                                                         inventory_material.remove("fiber")
                                                         break
                                         for i in inventory_material:
                                                 if i == "wood":
-                                                        correto = 2
+                                                        correto += 1
                                                         verificado.append("wood")
                                                         inventory_material.remove("wood")
                                                         break
                                         if correto == 2:
                                                 if (random.randint(1, 10) * (player_xp/100)) >= 3:
-                                                        print("Sucesso, a arma foi feita!")
+                                                        print("Sucess, the bow was made!")
                                                         number = 1
                                                         crafting.append(Bow(name,int(cost),player_xp))
                                                         player_xp += 13
@@ -608,23 +631,29 @@ while gold != 1000 and gold != 0:
                                                 for i in verificado:
                                                         inventory_material.append(i)
                                                 verificado.clear()
-                                if answer == "2":
+                                elif answer == "2" and player_xp >= 150:
                                         correto = 0
                                         for i in inventory_material:
                                                 if i == "fiber":
-                                                        correto = 1
+                                                        correto += 1
                                                         verificado.append("fiber")
                                                         inventory_material.remove("fiber")
                                                         break
                                         for i in inventory_material:
                                                 if i == "stone":
-                                                        correto = 2
+                                                        correto += 1
                                                         verificado.append("stone")
                                                         inventory_material.remove("stone")
                                                         break
-                                        if correto == 2:
+                                        for i in inventory_material:
+                                                if i == "stone":
+                                                        correto += 1
+                                                        verificado.append("stone")
+                                                        inventory_material.remove("stone")
+                                                        break
+                                        if correto == 3:
                                                 if (random.randint(1, 10) * (player_xp/100)) >= 6:
-                                                        print("Sucesso, a arma foi feita!")
+                                                        print("Sucess, the bow was made!")
                                                         number = 2
                                                         crafting.append(Bow(name,int(cost),player_xp))
                                                         player_xp += 23
@@ -637,26 +666,32 @@ while gold != 1000 and gold != 0:
                                                 for i in verificado:
                                                         inventory_material.append(i)
                                                 verificado.clear()
-                                if answer == "3":
+                                elif answer == "3" and player_xp >= 300:
                                         correto = 0
                                         for i in inventory_material:
                                                 if i == "fiber":
-                                                        correto = 1
+                                                        correto += 1
                                                         verificado.append("fiber")
                                                         inventory_material.remove("fiber")
                                                         break
                                         for i in inventory_material:
-                                                if i == "stone":
-                                                        correto = 2
-                                                        verificado.append("stone")
-                                                        inventory_material.remove("stone")
+                                                if i == "iron":
+                                                        correto += 1
+                                                        verificado.append("iron")
+                                                        inventory_material.remove("iron")
                                                         break
-                                        if correto == 2:
-                                                if (random.randint(1, 10) * (player_xp/100)) >= 6:
-                                                        print("Sucesso, a arma foi feita!")
-                                                        number = 2
+                                        for i in inventory_material:
+                                                if i == "iron":
+                                                        correto += 1
+                                                        verificado.append("iron")
+                                                        inventory_material.remove("iron")
+                                                        break
+                                        if correto == 3:
+                                                if (random.randint(1, 10) * (player_xp/100)) >= 11:
+                                                        print("Sucess, the bow was made!")
+                                                        number = 3
                                                         crafting.append(Bow(name,int(cost),player_xp))
-                                                        player_xp += 23
+                                                        player_xp += 43
                                                 else:
                                                         print("It went wrong")
                                                 for i in crafting:
@@ -666,12 +701,194 @@ while gold != 1000 and gold != 0:
                                                 for i in verificado:
                                                         inventory_material.append(i)
                                                 verificado.clear()
-                                
+                                elif answer == "4" and player_xp >= 500:
+                                        correto = 0
+                                        for i in inventory_material:
+                                                if i == "fiber":
+                                                        correto += 1
+                                                        verificado.append("fiber")
+                                                        inventory_material.remove("fiber")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "iron":
+                                                        correto += 1
+                                                        verificado.append("iron")
+                                                        inventory_material.remove("iron")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "iron":
+                                                        correto += 1
+                                                        verificado.append("iron")
+                                                        inventory_material.remove("iron")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "leather":
+                                                        correto += 1
+                                                        verificado.append("leather")
+                                                        inventory_material.remove("leather")
+                                                        break
+                                        if correto == 4:
+                                                if (random.randint(1, 10) * (player_xp/100)) >= 16:
+                                                        print("Sucess, the bow was made!")
+                                                        number = 4
+                                                        crafting.append(Bow(name,int(cost),player_xp))
+                                                        player_xp += 63
+                                                else:
+                                                        print("It went wrong")
+                                                for i in crafting:
+                                                        inventory_sell.appendleft((i.name, i.cost))
+                                        else:
+                                                print("You don't have enough materials")
+                                                for i in verificado:
+                                                        inventory_material.append(i)
+                                                verificado.clear()
+                                elif answer == "5" and player_xp >= 800:
+                                        correto = 0
+                                        for i in inventory_material:
+                                                if i == "fiber":
+                                                        correto += 1
+                                                        verificado.append("fiber")
+                                                        inventory_material.remove("fiber")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "iron":
+                                                        correto += 1
+                                                        verificado.append("iron")
+                                                        inventory_material.remove("iron")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "iron":
+                                                        correto += 1
+                                                        verificado.append("iron")
+                                                        inventory_material.remove("iron")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "leather":
+                                                        correto += 1
+                                                        verificado.append("leather")
+                                                        inventory_material.remove("leather")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "ruby":
+                                                        correto += 1
+                                                        verificado.append("ruby")
+                                                        inventory_material.remove("ruby")
+                                                        break
+                                        if correto == 5:
+                                                if (random.randint(1, 10) * (player_xp/100)) >= 20:
+                                                        print("Sucess, the bow was made!")
+                                                        number = 5
+                                                        crafting.append(Bow(name,int(cost),player_xp))
+                                                        player_xp += 103
+                                                else:
+                                                        print("It went wrong")
+                                                for i in crafting:
+                                                        inventory_sell.appendleft((i.name, i.cost))
+                                        else:
+                                                print("You don't have enough materials")
+                                                for i in verificado:
+                                                        inventory_material.append(i)
+                                                verificado.clear()
+                                elif answer == "6" and player_xp >= 900:
+                                        correto = 0
+                                        for i in inventory_material:
+                                                if i == "fiber":
+                                                        correto += 1
+                                                        verificado.append("fiber")
+                                                        inventory_material.remove("fiber")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "iron":
+                                                        correto += 1
+                                                        verificado.append("iron")
+                                                        inventory_material.remove("iron")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "iron":
+                                                        correto += 1
+                                                        verificado.append("iron")
+                                                        inventory_material.remove("iron")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "leather":
+                                                        correto += 1
+                                                        verificado.append("leather")
+                                                        inventory_material.remove("leather")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "sapphire":
+                                                        correto += 1
+                                                        verificado.append("sapphire")
+                                                        inventory_material.remove("sapphire")
+                                                        break
+                                        if correto == 5:
+                                                if (random.randint(1, 10) * (player_xp/100)) >= 25:
+                                                        print("Sucess, the bow was made!")
+                                                        number = 6
+                                                        crafting.append(Bow(name,int(cost),player_xp))
+                                                        player_xp += 113
+                                                else:
+                                                        print("It went wrong")
+                                                for i in crafting:
+                                                        inventory_sell.appendleft((i.name, i.cost))
+                                        else:
+                                                print("You don't have enough materials")
+                                                for i in verificado:
+                                                        inventory_material.append(i)
+                                                verificado.clear()
+                                elif answer == "7" and player_xp >= 1100:
+                                        correto = 0
+                                        for i in inventory_material:
+                                                if i == "fiber":
+                                                        correto = 1
+                                                        verificado.append("fiber")
+                                                        inventory_material.remove("fiber")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "iron":
+                                                        correto += 1
+                                                        verificado.append("iron")
+                                                        inventory_material.remove("iron")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "iron":
+                                                        correto += 1
+                                                        verificado.append("iron")
+                                                        inventory_material.remove("iron")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "leather":
+                                                        correto += 1
+                                                        verificado.append("leather")
+                                                        inventory_material.remove("leather")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "diamond":
+                                                        correto += 1
+                                                        verificado.append("diamond")
+                                                        inventory_material.remove("diamond")
+                                                        break
+                                        if correto == 5:
+                                                if (random.randint(1, 10) * (player_xp/100)) >= 28:
+                                                        print("Sucess, the bow was made!")
+                                                        number = 7
+                                                        crafting.append(Bow(name,int(cost),player_xp))
+                                                        player_xp += 123
+                                                else:
+                                                        print("It went wrong")
+                                                for i in crafting:
+                                                        inventory_sell.appendleft((i.name, i.cost))
+                                        else:
+                                                print("You don't have enough materials")
+                                                for i in verificado:
+                                                        inventory_material.append(i)
+                                                verificado.clear()
                                 elif answer == "back":
                                         break
                                 else:
                                         print("Only write the possible number(s) or 'back'")
                                         apagar_ecra()
+                        
                         elif answer == "3":
                                 print("Wooden Shield - 1")
                                 if player_xp >= 100:
@@ -685,32 +902,610 @@ while gold != 1000 and gold != 0:
                                 if player_xp >= 500:
                                         print("Super Ultra Shield - 6")
                                 answer = Answer()
+                                if answer == "1":
+                                        correto = 0
+                                        for i in inventory_material:
+                                                if i == "wood":
+                                                        correto += 1
+                                                        verificado.append("wood")
+                                                        inventory_material.remove("wood")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "wood":
+                                                        correto += 1
+                                                        verificado.append("wood")
+                                                        inventory_material.remove("wood")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "wood":
+                                                        correto += 1
+                                                        verificado.append("wood")
+                                                        inventory_material.remove("wood")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "wood":
+                                                        correto += 1
+                                                        verificado.append("wood")
+                                                        inventory_material.remove("wood")
+                                                        break
+                                        if correto == 4:
+                                                if (random.randint(1, 10) * (player_xp/100)) >= 4:
+                                                        print("Sucess, the shield was made!")
+                                                        number = 1
+                                                        crafting.append(Shield(name,int(cost),player_xp))
+                                                        player_xp += 25
+                                                else:
+                                                        print("It went wrong")
+                                                for i in crafting:
+                                                        inventory_sell.appendleft((i.name, i.cost))
+                                        else:
+                                                print("You don't have enough materials")
+                                                for i in verificado:
+                                                        inventory_material.append(i)
+                                                verificado.clear()                               
+                                elif answer == "2" and player_xp >= 100:
+                                        correto = 0
+                                        for i in inventory_material:
+                                                if i == "stone":
+                                                        correto += 1
+                                                        verificado.append("stone")
+                                                        inventory_material.remove("stone")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "stone":
+                                                        correto += 1
+                                                        verificado.append("stone")
+                                                        inventory_material.remove("stone")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "stone":
+                                                        correto += 1
+                                                        verificado.append("stone")
+                                                        inventory_material.remove("stone")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "stone":
+                                                        correto += 1
+                                                        verificado.append("stone")
+                                                        inventory_material.remove("stone")
+                                                        break
+                                        if correto == 4:
+                                                if (random.randint(1, 10) * (player_xp/100)) >= 7:
+                                                        print("Sucess, the shield was made!")
+                                                        number = 2
+                                                        crafting.append(Shield(name,int(cost),player_xp))
+                                                        player_xp += 35
+                                                else:
+                                                        print("It went wrong")
+                                                for i in crafting:
+                                                        inventory_sell.appendleft((i.name, i.cost))
+                                        else:
+                                                print("You don't have enough materials")
+                                                for i in verificado:
+                                                        inventory_material.append(i)
+                                                verificado.clear()                               
+                                elif answer == "3" and player_xp >= 200:
+                                        correto = 0
+                                        for i in inventory_material:
+                                                if i == "iron":
+                                                        correto += 1
+                                                        verificado.append("iron")
+                                                        inventory_material.remove("iron")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "iron":
+                                                        correto += 1
+                                                        verificado.append("iron")
+                                                        inventory_material.remove("iron")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "iron":
+                                                        correto += 1
+                                                        verificado.append("iron")
+                                                        inventory_material.remove("iron")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "iron":
+                                                        correto += 1
+                                                        verificado.append("iron")
+                                                        inventory_material.remove("iron")
+                                                        break
+                                        if correto == 4:
+                                                if (random.randint(1, 10) * (player_xp/100)) >= 13:
+                                                        print("Sucess, the shield was made!")
+                                                        number = 3
+                                                        crafting.append(Shield(name,int(cost),player_xp))
+                                                        player_xp += 45
+                                                else:
+                                                        print("It went wrong")
+                                                for i in crafting:
+                                                        inventory_sell.appendleft((i.name, i.cost))
+                                        else:
+                                                print("You don't have enough materials")
+                                                for i in verificado:
+                                                        inventory_material.append(i)
+                                                verificado.clear()                               
+                                elif answer == "4" and player_xp >= 300:
+                                        correto = 0
+                                        for i in inventory_material:
+                                                if i == "iron":
+                                                        correto += 1
+                                                        verificado.append("iron")
+                                                        inventory_material.remove("iron")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "iron":
+                                                        correto += 1
+                                                        verificado.append("iron")
+                                                        inventory_material.remove("iron")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "iron":
+                                                        correto += 1
+                                                        verificado.append("iron")
+                                                        inventory_material.remove("iron")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "iron":
+                                                        correto += 1
+                                                        verificado.append("iron")
+                                                        inventory_material.remove("iron")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "iron":
+                                                        correto += 1
+                                                        verificado.append("iron")
+                                                        inventory_material.remove("iron")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "ruby":
+                                                        correto += 1
+                                                        verificado.append("ruby")
+                                                        inventory_material.remove("ruby")
+                                                        break
+                                        if correto == 6:
+                                                if (random.randint(1, 10) * (player_xp/100)) >= 16:
+                                                        print("Sucess, the shield was made!")
+                                                        number = 4
+                                                        crafting.append(Shield(name,int(cost),player_xp))
+                                                        player_xp += 85
+                                                else:
+                                                        print("It went wrong")
+                                                for i in crafting:
+                                                        inventory_sell.appendleft((i.name, i.cost))
+                                        else:
+                                                print("You don't have enough materials")
+                                                for i in verificado:
+                                                        inventory_material.append(i)
+                                                verificado.clear()                             
+                                elif answer == "5" and player_xp >= 400:
+                                        correto = 0
+                                        for i in inventory_material:
+                                                if i == "iron":
+                                                        correto += 1
+                                                        verificado.append("iron")
+                                                        inventory_material.remove("iron")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "iron":
+                                                        correto += 1
+                                                        verificado.append("iron")
+                                                        inventory_material.remove("iron")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "iron":
+                                                        correto += 1
+                                                        verificado.append("iron")
+                                                        inventory_material.remove("iron")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "iron":
+                                                        correto += 1
+                                                        verificado.append("iron")
+                                                        inventory_material.remove("iron")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "iron":
+                                                        correto += 1
+                                                        verificado.append("iron")
+                                                        inventory_material.remove("iron")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "sapphire":
+                                                        correto += 1
+                                                        verificado.append("sapphire")
+                                                        inventory_material.remove("sapphire")
+                                                        break
+                                        if correto == 6:
+                                                if (random.randint(1, 10) * (player_xp/100)) >= 20:
+                                                        print("Sucess, the shield was made!")
+                                                        number = 5
+                                                        crafting.append(Shield(name,int(cost),player_xp))
+                                                        player_xp += 95
+                                                else:
+                                                        print("It went wrong")
+                                                for i in crafting:
+                                                        inventory_sell.appendleft((i.name, i.cost))
+                                        else:
+                                                print("You don't have enough materials")
+                                                for i in verificado:
+                                                        inventory_material.append(i)
+                                                verificado.clear()
+                                elif answer == "6" and player_xp >= 500:
+                                        correto = 0
+                                        for i in inventory_material:
+                                                if i == "iron":
+                                                        correto += 1
+                                                        verificado.append("iron")
+                                                        inventory_material.remove("iron")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "iron":
+                                                        correto += 1
+                                                        verificado.append("iron")
+                                                        inventory_material.remove("iron")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "iron":
+                                                        correto += 1
+                                                        verificado.append("iron")
+                                                        inventory_material.remove("iron")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "iron":
+                                                        correto += 1
+                                                        verificado.append("iron")
+                                                        inventory_material.remove("iron")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "iron":
+                                                        correto += 1
+                                                        verificado.append("iron")
+                                                        inventory_material.remove("iron")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "diamond":
+                                                        correto += 1
+                                                        verificado.append("diamond")
+                                                        inventory_material.remove("diamond")
+                                                        break
+                                        if correto == 6:
+                                                if (random.randint(1, 10) * (player_xp/100)) >= 25:
+                                                        print("Sucess, the shield was made!")
+                                                        number = 6
+                                                        crafting.append(Shield(name,int(cost),player_xp))
+                                                        player_xp += 105
+                                                else:
+                                                        print("It went wrong")
+                                                for i in crafting:
+                                                        inventory_sell.appendleft((i.name, i.cost))
+                                        else:
+                                                print("You don't have enough materials")
+                                                for i in verificado:
+                                                        inventory_material.append(i)
+                                                verificado.clear()
+                                elif answer == "back":
+                                        break
+                                else:
+                                        print("Only write the possible number(s) or 'back'")
+                                        apagar_ecra()
+                        
                         elif answer == "4":
                                 print("Wooden Plate - 1")
                                 if player_xp >= 300:
-                                        print("-\nStone extension")
+                                        print("-\nStone extension - 2")
                                 if player_xp >= 500:
-                                        print("-\nMega Armor")
+                                        print("-\nMega Armor - 3")
                                 if player_xp >= 1000:
-                                        print("-\nBlazing Mega Armor")
+                                        print("-\nBlazing Mega Armor - 4")
                                 if player_xp >= 1200:
-                                        print("-\nChilling Mega Armor")
+                                        print("-\nChilling Mega Armor - 5")
                                 if player_xp >= 5000:
-                                        print("-\nDivine Mega Armor")
+                                        print("-\nDivine Mega Armor - 6")
                                 answer = Answer()
-                        break
-                """ if inventory_material:
-                        for i in inventory_material:
-                                if answer == i:
-                                        crafting.append(answer)
-                                        inventory_material.remove(answer)
-                                        errado = 0
-                                        break
-                                if answer == "done":
-                                        errado = 0
+                                if answer == "1":
+                                        correto = 0
+                                        for i in inventory_material:
+                                                if i == "wood":
+                                                        correto += 1
+                                                        verificado.append("wood")
+                                                        inventory_material.remove("wood")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "wood":
+                                                        correto += 1
+                                                        verificado.append("wood")
+                                                        inventory_material.remove("wood")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "wood":
+                                                        correto += 1
+                                                        verificado.append("wood")
+                                                        inventory_material.remove("wood")
+                                                        break
+                                        if correto == 3:
+                                                if (random.randint(1, 10) * (player_xp/100)) >= 3:
+                                                        print("Sucess, the armour was made!")
+                                                        number = 1
+                                                        crafting.append(Armour(name,int(cost),player_xp))
+                                                        player_xp += 29
+                                                else:
+                                                        print("It went wrong")
+                                                for i in crafting:
+                                                        inventory_sell.appendleft((i.name, i.cost))
+                                        else:
+                                                print("You don't have enough materials")
+                                                for i in verificado:
+                                                        inventory_material.append(i)
+                                                verificado.clear()
+                                elif answer == "2" and player_xp >= 300:
+                                        correto = 0
+                                        for i in inventory_material:
+                                                if i == "wood":
+                                                        correto += 1
+                                                        verificado.append("wood")
+                                                        inventory_material.remove("wood")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "wood":
+                                                        correto += 1
+                                                        verificado.append("wood")
+                                                        inventory_material.remove("wood")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "wood":
+                                                        correto += 1
+                                                        verificado.append("wood")
+                                                        inventory_material.remove("wood")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "stone":
+                                                        correto += 1
+                                                        verificado.append("stone")
+                                                        inventory_material.remove("stone")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "stone":
+                                                        correto += 1
+                                                        verificado.append("stone")
+                                                        inventory_material.remove("stone")
+                                                        break
+                                        if correto == 5:
+                                                if (random.randint(1, 10) * (player_xp/100)) >= 7:
+                                                        print("Sucess, the armour was made!")
+                                                        number = 2
+                                                        crafting.append(Armour(name,int(cost),player_xp))
+                                                        player_xp += 49
+                                                else:
+                                                        print("It went wrong")
+                                                for i in crafting:
+                                                        inventory_sell.appendleft((i.name, i.cost))
+                                        else:
+                                                print("You don't have enough materials")
+                                                for i in verificado:
+                                                        inventory_material.append(i)
+                                                verificado.clear()
+                                elif answer == "3" and player_xp >= 500:
+                                        correto = 0
+                                        for i in inventory_material:
+                                                if i == "iron":
+                                                        correto += 1
+                                                        verificado.append("iron")
+                                                        inventory_material.remove("iron")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "iron":
+                                                        correto += 1
+                                                        verificado.append("iron")
+                                                        inventory_material.remove("iron")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "iron":
+                                                        correto += 1
+                                                        verificado.append("iron")
+                                                        inventory_material.remove("iron")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "iron":
+                                                        correto += 1
+                                                        verificado.append("iron")
+                                                        inventory_material.remove("iron")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "stone":
+                                                        correto += 1
+                                                        verificado.append("stone")
+                                                        inventory_material.remove("stone")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "stone":
+                                                        correto += 1
+                                                        verificado.append("stone")
+                                                        inventory_material.remove("stone")
+                                                        break
+                                        if correto == 6:
+                                                if (random.randint(1, 10) * (player_xp/100)) >= 19:
+                                                        print("Sucess, the armour was made!")
+                                                        number = 3
+                                                        crafting.append(Armour(name,int(cost),player_xp))
+                                                        player_xp +=69
+                                                else:
+                                                        print("It went wrong")
+                                                for i in crafting:
+                                                        inventory_sell.appendleft((i.name, i.cost))
+                                        else:
+                                                print("You don't have enough materials")
+                                                for i in verificado:
+                                                        inventory_material.append(i)
+                                                verificado.clear()
+                                elif answer == "4" and player_xp >= 1000:
+                                        correto = 0
+                                        for i in inventory_material:
+                                                if i == "iron":
+                                                        correto += 1
+                                                        verificado.append("iron")
+                                                        inventory_material.remove("iron")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "iron":
+                                                        correto += 1
+                                                        verificado.append("iron")
+                                                        inventory_material.remove("iron")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "iron":
+                                                        correto += 1
+                                                        verificado.append("iron")
+                                                        inventory_material.remove("iron")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "iron":
+                                                        correto += 1
+                                                        verificado.append("iron")
+                                                        inventory_material.remove("iron")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "iron":
+                                                        correto += 1
+                                                        verificado.append("iron")
+                                                        inventory_material.remove("iron")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "ruby":
+                                                        correto += 1
+                                                        verificado.append("ruby")
+                                                        inventory_material.remove("ruby")
+                                                        break
+                                        if correto == 6:
+                                                if (random.randint(1, 10) * (player_xp/100)) >= 24:
+                                                        print("Sucess, the armour was made!")
+                                                        number = 4
+                                                        crafting.append(Armour(name,int(cost),player_xp))
+                                                        player_xp +=139
+                                                else:
+                                                        print("It went wrong")
+                                                for i in crafting:
+                                                        inventory_sell.appendleft((i.name, i.cost))
+                                        else:
+                                                print("You don't have enough materials")
+                                                for i in verificado:
+                                                        inventory_material.append(i)
+                                                verificado.clear()
+                                elif answer == "5" and player_xp >= 1200:
+                                        correto = 0
+                                        for i in inventory_material:
+                                                if i == "iron":
+                                                        correto += 1
+                                                        verificado.append("iron")
+                                                        inventory_material.remove("iron")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "iron":
+                                                        correto += 1
+                                                        verificado.append("iron")
+                                                        inventory_material.remove("iron")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "iron":
+                                                        correto += 1
+                                                        verificado.append("iron")
+                                                        inventory_material.remove("iron")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "iron":
+                                                        correto += 1
+                                                        verificado.append("iron")
+                                                        inventory_material.remove("iron")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "iron":
+                                                        correto += 1
+                                                        verificado.append("iron")
+                                                        inventory_material.remove("iron")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "sapphire":
+                                                        correto += 1
+                                                        verificado.append("sapphire")
+                                                        inventory_material.remove("sapphire")
+                                                        break
+                                        if correto == 6:
+                                                if (random.randint(1, 10) * (player_xp/100)) >= 27:
+                                                        print("Sucess, the armour was made!")
+                                                        number = 5
+                                                        crafting.append(Armour(name,int(cost),player_xp))
+                                                        player_xp +=159
+                                                else:
+                                                        print("It went wrong")
+                                                for i in crafting:
+                                                        inventory_sell.appendleft((i.name, i.cost))
+                                        else:
+                                                print("You don't have enough materials")
+                                                for i in verificado:
+                                                        inventory_material.append(i)
+                                                verificado.clear()
+                                elif answer == "6" and player_xp >= 5000:
+                                        correto = 0
+                                        for i in inventory_material:
+                                                if i == "iron":
+                                                        correto += 1
+                                                        verificado.append("iron")
+                                                        inventory_material.remove("iron")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "iron":
+                                                        correto += 1
+                                                        verificado.append("iron")
+                                                        inventory_material.remove("iron")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "iron":
+                                                        correto += 1
+                                                        verificado.append("iron")
+                                                        inventory_material.remove("iron")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "iron":
+                                                        correto += 1
+                                                        verificado.append("iron")
+                                                        inventory_material.remove("iron")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "iron":
+                                                        correto += 1
+                                                        verificado.append("iron")
+                                                        inventory_material.remove("iron")
+                                                        break
+                                        for i in inventory_material:
+                                                if i == "diamond":
+                                                        correto += 1
+                                                        verificado.append("diamond")
+                                                        inventory_material.remove("diamond")
+                                                        break
+                                        if correto == 6:
+                                                if (random.randint(1, 10) * (player_xp/100)) >= 33:
+                                                        print("Sucess, the armour was made!")
+                                                        number = 6
+                                                        crafting.append(Armour(name,int(cost),player_xp))
+                                                        player_xp +=179
+                                                        apagar_ecra()
+                                                        print("Achievement: YOU ASCENDED!!!")
+                                                        time.sleep(10)
+                                                else:
+                                                        print("It went wrong")
+                                                for i in crafting:
+                                                        inventory_sell.appendleft((i.name, i.cost))
+                                        else:
+                                                print("You don't have enough materials")
+                                                for i in verificado:
+                                                        inventory_material.append(i)
+                                                verificado.clear()
+                                elif answer == "back":
                                         break
                                 else:
-                                        errado += 1 """
+                                        print("Only write the possible number(s) or 'back'")
+                                        apagar_ecra()
+                        break
                 if not inventory_material and answer != "done":
                         print("You don't have any more items")
                         apagar_ecra()
@@ -721,7 +1516,12 @@ while gold != 1000 and gold != 0:
                         break
                 apagar_ecra()
         while(True):
-                print("Alright, now it's time ")
+                print("Alright, now it's time to sell everything")
+                for i in range(len(inventory_sell)):
+                        gold += int(inventory_sell[i][1])
+                        print("You sold your", inventory_sell[i][0], "for", inventory_sell[i][1])
+                inventory_sell.clear()
+                apagar_ecra()
                 break
 
 
