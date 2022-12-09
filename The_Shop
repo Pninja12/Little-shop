@@ -5,7 +5,7 @@ import time
 
 
 #Variáveis
-inventory_material = ["wood","wood","wood","wood","wood","wood","wood","wood","wood"]
+inventory_material = []
 inventory_sell = deque()
 gold = 10
 cost = 0
@@ -17,7 +17,7 @@ answer = ""
 material = ""
 crafting = []
 errado = 0
-player_xp = 1111111150
+player_xp = 50
 name = ""
 number = 0
 correto = 0
@@ -46,15 +46,15 @@ def apagar_ecra(): #Código original do meu colega Ricardo
                 #O 'clear' é o código para apagar o terminal no Mac e no linux
                 os.system('clear')
 
-def list_resource():
+def list_resource(): #Dá print de todos os resources que o player pode comprar
         print("--------------------\nWood for 1 gold\n--------------------\nStone for 2 gold\n--------------------\nIron for 4 gold\n--------------------\nFiber for 3 gold\n--------------------\nLeather for 5 gold\n--------------------\nSapphire for 50 gold\n--------------------\nRuby for 65 gold\n--------------------\nDiamond for 80 gold\n--------------------\n")
 
-def Answer():
+def Answer(): #Pede ao jogador o input
         print("\nWhen you feel ready, type 'done'")
         x = input("\n-->")
         return x.lower()
 
-def choice(x,z,a):
+def choice(x,z,a): #parte do Loop de compra, recebe o que comprar e depois adiciona o que comprou por 1 e retira o gold equivalente
         if x == "wood" and z >= 1:
                 z = z - 1
                 print("You bought Wood!")
@@ -94,7 +94,7 @@ def choice(x,z,a):
         
         return z,a
                 
-def show_craft(xp):
+def show_craft(xp): #Dá print de todas as recipes disponíveis
         print("Your crafting recipes are:")
         print("\nSwords:")
         print("You can make a Wooden Sword with 2 Wood")
@@ -165,7 +165,7 @@ class Craft:
                 self.player_xp = player_xp
 
 #Classes               
-class Sword(Craft):
+class Sword(Craft): #Classe para fazer 'craft' dos elemntos da Sword
         if number == 1:
                 def __init__(self, name, cost, player_xp):
                         super().__init__(name + "Sword", cost, player_xp)
@@ -195,7 +195,7 @@ class Sword(Craft):
                         super().__init__(name + "Sword", cost, xp)
                         self.player_xp += 97
 
-class Shield(Craft):
+class Shield(Craft): #Classe para fazer 'craft' dos elemntos da Shield
 
         if number == 1:
                 def __init__(self, name, cost, xp):
@@ -222,7 +222,7 @@ class Shield(Craft):
                         super().__init__(name + "Shield", cost, xp)
                         self.player_xp += 105
         
-class Bow(Craft):
+class Bow(Craft): #Classe para fazer 'craft' dos elemntos da Bow
 
         if number == 1:
                 def __init__(self, name, cost, xp):
@@ -253,7 +253,7 @@ class Bow(Craft):
                         super().__init__(name + "Bow", cost, xp)
                         self.player_xp += 123
 
-class Armour(Craft):
+class Armour(Craft): #Classe para fazer 'craft' dos elemntos da Armour
 
         if number == 1:
                 def __init__(self, name, cost, xp):
@@ -298,7 +298,7 @@ while gold <= objetivo and gold >= 0:
         day = day + 1
         apagar_ecra()
         print(f"Good morning, this is your {day}º day.\nLet's start the day with some shopping.")
-        while (True):
+        while (True): #Loop para o player comprar o itens
                 if gold == 0:
                         print("You have ran out of gold :(\nIt's okay, you will be able to sell items later")
                         time.sleep(2)
@@ -319,7 +319,7 @@ while gold <= objetivo and gold >= 0:
                         apagar_ecra()
                         break
                 apagar_ecra()
-        while(True):
+        while(True): #Loop para o player fazer o 'crafting'
                 errado = 0
                 print("Now it's time to craft.\nYou will use the materials you have bought before.")
                 show_craft(player_xp)
@@ -328,9 +328,9 @@ while gold <= objetivo and gold >= 0:
                         print(i,"\n--------")
                 print("What do you want to do?\nCraft a Sword - 1\n\nCraft a Bow - 2\n\nCraft a Shield - 3\n\nCraft a Armour - 4\n")
                 answer = Answer()
-                while(True):
+                while(True): #Loop para fazer a adição ao inventário com o que o player quer fazer 'crafting'
                         apagar_ecra()
-                        if answer == "1":
+                        if answer == "1": #Crafting da Sword
                                 print("Wooden Sword - 1")
                                 if player_xp >= 100:
                                         print("-\nStone Sword - 2")
@@ -587,7 +587,7 @@ while gold <= objetivo and gold >= 0:
                                         print("Only write the possible number(s) or 'back'")
                                         apagar_ecra()
                                 
-                        elif answer == "2":
+                        elif answer == "2": #Crafting da Bow
                                 print("Slingshot - 1")
                                 if player_xp >= 150:
                                         print("-\nStone Bow - 2")
@@ -889,7 +889,7 @@ while gold <= objetivo and gold >= 0:
                                         print("Only write the possible number(s) or 'back'")
                                         apagar_ecra()
                         
-                        elif answer == "3":
+                        elif answer == "3": #Crafting da Shield
                                 print("Wooden Shield - 1")
                                 if player_xp >= 100:
                                         print("Stone Shield - 2")
@@ -1190,7 +1190,7 @@ while gold <= objetivo and gold >= 0:
                                         print("Only write the possible number(s) or 'back'")
                                         apagar_ecra()
                         
-                        elif answer == "4":
+                        elif answer == "4": #Crafting da Armour
                                 print("Wooden Plate - 1")
                                 if player_xp >= 300:
                                         print("-\nStone extension - 2")
@@ -1515,7 +1515,7 @@ while gold <= objetivo and gold >= 0:
                 if answer == "done":
                         break
                 apagar_ecra()
-        while(True):
+        while(True): # Loop da venda
                 print("Alright, now it's time to sell everything")
                 for i in range(len(inventory_sell)):
                         gold += int(inventory_sell[i][1])
@@ -1523,50 +1523,3 @@ while gold <= objetivo and gold >= 0:
                 inventory_sell.clear()
                 apagar_ecra()
                 break
-
-
-                                        
-
-
-
-#Ajuda de fora
-
-
-""" nome = input("Diz-me o nome")
-ouro = input("diz-me o ouro")
-choosing.appendleft(Weapon(nome, int(ouro), 4))
-choosing.appendleft(Armor(nome, int(ouro)))
-while gold != 100000:"""
-        #For i que verifica qual a melhor maneira de representar uma classe
-"""
-        for i in reversed(choosing):
-                if isinstance(i, Weapon):
-                        print(i.name, i.gold, i.damage)
-                elif isinstance(i, Armor):
-                        print(i.name, i.gold)
-                break
-        x = choosing.pop()
-        result = input("Bom dia, que vai comprar?")
-        print(gold, cost)
-        gold += 1
-class Item:
-    name = ""
-    gold = 1
-    def __init__(self, name, gold):
-        self.name = name
-        self.gold = gold
-
-class Weapon(Item):
-        name = "Sword "
-        damage = 12
-        def __init__(self, subtype, gold, damage):
-                super().__init__(self.name + subtype, gold)
-                self.damage = damage
-
-        def calculateDamage(self, enemy):
-                enemy.hp -= self.damage
-
-class Armor(Item):
-        name = "Armor "
-        def __init__(self, subtype, gold):
-                super().__init__(self.name + subtype, gold) """
