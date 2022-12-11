@@ -1,70 +1,72 @@
-# Projeto de Iniciação à Computação
+# Fantasy Battle Defense Dealer 
 ### Relatório
 
-![Imagem com dragões](https://s2.glbimg.com/C3GPvh6ECD-33n8Df_v1EecSL9o=/0x0:1600x1000/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2019/m/H/k84eHgTA2l7JhjO3Q6Aw/wallpaper-2560-x-1600-wallpaper.jpg)
+![Imagem de uma loja](https://img.freepik.com/premium-vector/little-shop-stand-pixel-art-style_475147-1401.jpg?w=2000)
 
-### [Repositório GitHub](https://github.com/Pninja12/ProjetoD-D)
+### [Repositório GitHub] (https://github.com/Pninja12/Little-shop)
 
 ## Quem fez e o quê
 - Paulo Silva (22206205)
-    - Definição das classes
-    - Lógica do jogo
-    - Embelezamento Final
+    - Inicio do jogo
+    - Crafting
+    - Detalhes Visuais
+    - Venda
 - Mariana Marques (22207510)
-    - Definição de comportamento de cada personagem
-    - Definição de início e fim do jogo
+    - Introdução dos materiais no código
+    - Compra dos materiais
 
 ---
 
 ## Pontuação Extra
 
-[x] Sensibilidade para a usabilidade entre Jogador e Jogo
-[ ] Implementação de mais personagens
-[X] Implementação de mais variabilidade de inimigos
-[X] Implementação de Sistema de Magia para Inimigos
-[ ] Implementação de mais Feitiços
-[ ] Implementação de mais mecânicas de combate (e.g. Defend, Damage over Time, etc.).
+[ ]Interface em PyGame
+[ ] Sistema de "Barter" - O NPC pode negociar com com o Jogador (contraproposta)
+[X] Mais Recursos
+[ ] Sistema de Crafting mais refinado
+[X] Mais Items
+[ ] Selling Experience (Permite ao jogador vender a valores mais altos do que o normal)
+[ ] Sistema de Audio
 
 ---
 
 ## Lógica do código
 
-1. ##### Personagens
-    - Cada personagem é um dicionário
-    - Eles estão divididos pelos stats que os professores deram
-    - O Warrior e o Priest estavam ambos com stats não jogáveis
-    - O Warrior tinha a "ap" tão alta que ninguém lhe dava dano, por isso baixamos
-    - O Priest tinha o ataque básico tão baixo que não dava dano a ninguém, por isso aumentámos
-    - Adicionamos um Orc mago, para fazer um dos pontos extra, para tentar incluir um personagem com magia
-    - Adicionamos um Goblin, com 0 de "ap" e 5 de "wp" para deixar o jogo mais desafiante
-    - É impossível reviver o Warrior
+1. ##### Compra de materiais
+    - No começo de cada dia, o jogador tem que comprar materiais.
+    - O jogo diz-lhe quanto dinheiro tem e quanto dinheiro precisa para comprar o que quer.
+    - O loop da compra pára quando o jogador fica sem dinheiro ou quando escreve 'done'.
 
-2. ##### Ciclos
-    - O ciclo de 1 turno é um "for" que começa com um número mais alto que o possível (40) e desce até zero
-    - Os inits de cada personagem, quando igualados à variável do "for", faz com que ele atuem
-    - Se um personagem, ou os inimigos, estiverem mortos, mesmo que o init seja igual ao "for", ele não faz nada
+2. ##### Construção 
+    - Ao sair da compra, o jogador é apresentado com um menu de o que pode fazer, e o que tem com ele naquele momento.
+    - Quando escolhe que tipo quer fazer entre 'Weapon','Bow','Shield' e 'Armour', o jogador depois depara-se com os tipo de formas diferentes que ele pode fazer.
+    - Após selecionar o que quer fazer, o programa verifica se o jogador tem 'experience points' e materiais necessários e começa a produção.
+    - Se a produção falhar, o jogador fica sem os materiais, mas se conseguir então o programa pede ao jogador que este diga um nome e um custo para o que criou.
+    - O loop acaba quando o jogador escrever 'done' ou ficar sem itens no inventário.
 
-3. ##### Funções
-    - A função "apagar_ecra" lê em que tipo de computador o utilizador está e apaga todos os conteúdos do terminal
-    - A função "chamar_inimigo" dá print de todos os inimigos vivos
-    - A função "chamar_player" dá print de todos os personagens do jogador vivos
+3. ##### Venda
+    - Quando o jogador sair do menu de criação de itens, depara-se com o ecrã a dizer que os itens estão a ser vendidos com o custo que o jogador deu.
+
+5. ##### Loop do jogo
+    - O jogo só acaba quando o jogador chegar a um valor de moedas previamente estipulado ou quando não tiver moedas
 
 4. ##### Import's
     - O "import os" é usado para apagar as linhas do terminal
     - O "import time" é usado para fazer o programa esperar algum tempo antes de apagar as linhas do terminal
-    - O "import random" é usado para fazer o lançamento do dado tanto para inits como para ataques de magia
+    - O "import random" é usado para verificar se um item é bem sucedido ou não
 
-5. ##### Pensamento Lógico
-    - Os personagens estão por ordem de init no ciclo "for" para que quando houver o problema de ambos terem o mesmo Init, atacar primeiro quem tem o Init maior.
-    - O inimigo ataca primeiro sempre o Warrior e só depois o Priest, já que foi complicado fazer um AI próprio para isso
-    - O Orc Mage gasta primeiro sempre a mana e só depois é que ataca normalmente, já que foi complicado fazer um AI próprio para isso
+5. ##### Faltas
+    - O jogador pode por um custo absurdo no seu item e ganhar esse mesmo dinheiro na venda.
+
+5. ##### Easter Egg
+    - Quando um jogador fabrica a armadura de mais alto nível, aparece à frente do jogador que ele 'ascendeu'
 
 6. ##### Informação usada de fora
     - Site [W3Schools](https://www.w3schools.com/python/python_dictionaries.asp)
     - Colegas:
         | Nome | Número | Ajuda |
         | - | - | - |
-        | António Rodrigues | 22202884 | Lógica do loop "for" |
-        | Henrique Monteiro | 22202855 | Discussão de lógica sobre o ataque |
-        | João Silva | 22004451 | Discussão de lógica sobre o ataque |
+        | António Rodrigues | 22202884 | Materiais |
+        | Henrique Monteiro | 22202855 | Lógica do loop "for" |
+        | João Silva | 22004451 | Hint como ajuda no primeiro dia |
         | Ricardo de Almeida | 21807601 | Lógica de apagar o terminal |
+        | Prof. Phil Lopes | ? | Ajuda nas classes |
